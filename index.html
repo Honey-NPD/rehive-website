@@ -6,6 +6,8 @@
 
 <style>
 
+/* GLOBAL */
+
 html{
 scroll-behavior:smooth;
 }
@@ -13,12 +15,14 @@ scroll-behavior:smooth;
 body{
 margin:0;
 font-family:Georgia, serif;
+background:#faf7f2;
 color:#333;
+padding-top:80px;
 overflow-x:hidden;
 transition:background 1.2s ease;
 }
 
-/* ---------- NAV ---------- */
+/* NAV */
 
 nav{
 position:fixed;
@@ -28,14 +32,14 @@ background:white;
 display:flex;
 justify-content:center;
 align-items:center;
-gap:20px;
-padding:12px 0;
-box-shadow:0 4px 12px rgba(0,0,0,0.1);
+gap:35px;
+padding:16px;
+box-shadow:0 3px 12px rgba(0,0,0,0.1);
 z-index:100;
 }
 
 nav img{
-height:38px;
+height:36px;
 }
 
 nav a{
@@ -45,7 +49,7 @@ font-weight:bold;
 letter-spacing:1px;
 }
 
-/* ---------- HERO ---------- */
+/* HERO */
 
 .hero{
 height:100vh;
@@ -54,48 +58,53 @@ flex-direction:column;
 align-items:center;
 justify-content:center;
 text-align:center;
-position:relative;
-overflow:hidden;
+background:linear-gradient(120deg,#f7d98a,#fff3c9);
 }
 
 .hero h1{
 font-size:70px;
 letter-spacing:4px;
+margin:0;
 display:flex;
 align-items:center;
 gap:15px;
-margin:0;
 }
 
 .hero p{
 font-size:22px;
 }
 
-.hero-tagline{
-font-size:19px;
+.tagline{
 max-width:650px;
+font-size:20px;
 margin-top:10px;
 }
 
+/* FLOATING JAR */
+
 .jar{
 margin-top:30px;
-width:230px;
+width:240px;
 animation:float 6s ease-in-out infinite;
+}
+
+.jar img{
+width:100%;
 }
 
 @keyframes float{
 0%{transform:translateY(0)}
-50%{transform:translateY(-20px)}
+50%{transform:translateY(-18px)}
 100%{transform:translateY(0)}
 }
 
-/* ---------- SECTIONS ---------- */
+/* SECTIONS */
 
 .section{
-padding:65px 15%;
+padding:70px 15%;
 opacity:0;
-transform:translateY(30px);
-transition:0.8s;
+transform:translateY(40px);
+transition:1s;
 }
 
 .section.visible{
@@ -109,39 +118,50 @@ margin-bottom:20px;
 text-align:center;
 }
 
-/* ---------- FLAVOURS ---------- */
+/* FLAVOURS */
 
 .flavours{
 display:flex;
+gap:30px;
 flex-wrap:wrap;
-gap:25px;
-justify-content:center;
 }
 
 .card{
 flex:1;
-min-width:260px;
-padding:28px;
+min-width:250px;
+padding:30px;
 border-radius:12px;
-box-shadow:0 15px 25px rgba(0,0,0,0.12);
-transition:0.4s;
 color:white;
-cursor:pointer;
+box-shadow:0 15px 30px rgba(0,0,0,0.15);
+transition:0.4s;
 }
 
 .card:hover{
-transform:translateY(-8px) scale(1.02);
+transform:translateY(-10px);
 }
 
-/* flavour colours */
+.strawberry{
+background:linear-gradient(135deg,#ff7a9c,#ffb3c7);
+}
 
-.strawberry{background:linear-gradient(135deg,#ff7a9c,#ffb3c7);}
-.raspberry{background:linear-gradient(135deg,#b5123d,#ff4d77);}
-.blueberry{background:linear-gradient(135deg,#4e63d9,#8ea0ff);}
-.banana{background:linear-gradient(135deg,#ffd95a,#ffe99a);color:#333;}
-.limited{background:linear-gradient(135deg,#8c6b2d,#d8b55b);}
+.raspberry{
+background:linear-gradient(135deg,#b5123d,#ff4d77);
+}
 
-/* ---------- PROCESS ---------- */
+.blueberry{
+background:linear-gradient(135deg,#4e63d9,#8ea0ff);
+}
+
+.banana{
+background:linear-gradient(135deg,#ffd95a,#ffe99a);
+color:#333;
+}
+
+.limited{
+background:linear-gradient(135deg,#8a6a2b,#d6b56b);
+}
+
+/* PROCESS */
 
 .process{
 display:flex;
@@ -152,43 +172,43 @@ margin:auto;
 }
 
 .step{
-padding:22px;
-border-radius:10px;
 background:linear-gradient(135deg,#f5e2b8,#d7b067);
-box-shadow:0 8px 16px rgba(0,0,0,0.12);
-font-weight:bold;
+padding:25px;
+border-radius:10px;
+box-shadow:0 8px 18px rgba(0,0,0,0.1);
 text-align:center;
-transition:0.4s;
+font-weight:bold;
+transition:0.3s;
 }
 
 .step:hover{
 transform:scale(1.03);
 }
 
-/* ---------- SERVING ---------- */
+/* SERVING */
 
-.serving-list{
+.serving ul{
 max-width:500px;
 margin:auto;
 }
 
-.serving-list li{
-margin:10px 0;
+.serving li{
+margin:8px 0;
 font-size:18px;
 }
 
-/* ---------- TEAM ---------- */
+/* TEAM */
 
 .team{
 display:grid;
 grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
-gap:20px;
+gap:25px;
 margin-top:20px;
 }
 
 .member{
 background:white;
-padding:18px;
+padding:20px;
 border-radius:10px;
 box-shadow:0 6px 15px rgba(0,0,0,0.1);
 text-align:center;
@@ -199,22 +219,19 @@ transition:0.3s;
 transform:translateY(-5px);
 }
 
-/* ---------- FOOTER ---------- */
+/* FOOTER */
 
 footer{
 background:#333;
 color:white;
 text-align:center;
-padding:45px;
-margin-top:30px;
+padding:60px;
 }
 
 </style>
 </head>
 
 <body>
-
-<!-- NAV -->
 
 <nav>
 
@@ -224,12 +241,9 @@ margin-top:30px;
 <a href="#flavours">Flavours</a>
 <a href="#process">Process</a>
 <a href="#serving">Serving</a>
-<a href="#team">Team</a>
 
 </nav>
 
-
-<!-- HERO -->
 
 <section class="hero">
 
@@ -237,7 +251,7 @@ margin-top:30px;
 
 <p>Fruit Infused Raw Honey</p>
 
-<p class="hero-tagline">
+<p class="tagline">
 Luxury creamed honey crafted from single-apiary Nottingham honey and vibrant fruit infusions.<br>
 Small batch · Seasonal · Sustainable
 </p>
@@ -248,8 +262,6 @@ Small batch · Seasonal · Sustainable
 
 </section>
 
-
-<!-- ABOUT -->
 
 <section class="section" id="about">
 
@@ -264,17 +276,15 @@ Each jar contains locally sourced raw honey from a single Nottinghamshire apiary
 </p>
 
 <p>
-The honey is whipped to create a smooth, spreadable texture before being finished with a distinctive two-colour fruit swirl.
+The honey is carefully whipped to create a smooth spreadable texture and finished with a two-colour fruit swirl.
 </p>
 
 <p>
-Every 227g jar of Raspberry Ripple captures the flavour of roughly twenty whole raspberries using our gentle drying and extraction process.
+Every 227g jar of Raspberry Ripple contains the flavour of roughly 20 whole raspberries captured through our gentle drying and extraction process.
 </p>
 
 </section>
 
-
-<!-- FLAVOURS -->
 
 <section class="section" id="flavours">
 
@@ -284,7 +294,7 @@ Every 227g jar of Raspberry Ripple captures the flavour of roughly twenty whole 
 
 <div class="card strawberry">
 <h3>Strawberry Shortcake</h3>
-<p>Sweet strawberries paired with smooth vanilla creamed honey.</p>
+<p>Sweet strawberry flavour blended with smooth vanilla creamed honey.</p>
 </div>
 
 <div class="card raspberry">
@@ -294,7 +304,7 @@ Every 227g jar of Raspberry Ripple captures the flavour of roughly twenty whole 
 
 <div class="card blueberry">
 <h3>Blueberry & Lemon Tart</h3>
-<p>Deep blueberry notes balanced with a bright lemon zing, creating a vibrant and refreshing flavour.</p>
+<p>Deep blueberry notes balanced with a bright lemon zing, creating a vibrant premium flavour.</p>
 </div>
 
 <div class="card banana">
@@ -312,8 +322,6 @@ Every 227g jar of Raspberry Ripple captures the flavour of roughly twenty whole 
 </section>
 
 
-<!-- PROCESS -->
-
 <section class="section" id="process">
 
 <h2>Our Process</h2>
@@ -321,17 +329,11 @@ Every 227g jar of Raspberry Ripple captures the flavour of roughly twenty whole 
 <div class="process">
 
 <div class="step">Local Raw Honey</div>
-
 <div class="step">Surplus & Foraged Fruit</div>
-
-<div class="step">Low-Energy Vacuum Drying</div>
-
-<div class="step">Fruit Powder & Extract Creation</div>
-
+<div class="step">Low Energy Vacuum Drying</div>
+<div class="step">Fruit Powder + Fruit Extract</div>
 <div class="step">Honey Creaming Process</div>
-
-<div class="step">Dual-Colour Fruit Swirl</div>
-
+<div class="step">Dual Colour Fruit Swirl</div>
 <div class="step">Small Batch Jarring</div>
 
 </div>
@@ -339,13 +341,11 @@ Every 227g jar of Raspberry Ripple captures the flavour of roughly twenty whole 
 </section>
 
 
-<!-- SERVING -->
-
-<section class="section" id="serving">
+<section class="section serving" id="serving">
 
 <h2>Serving Inspiration</h2>
 
-<ul class="serving-list">
+<ul>
 
 <li>Sourdough toast</li>
 <li>Yogurt and granola</li>
@@ -358,9 +358,7 @@ Every 227g jar of Raspberry Ripple captures the flavour of roughly twenty whole 
 </section>
 
 
-<!-- TEAM -->
-
-<section class="section" id="team">
+<section class="section">
 
 <h2>Team Uniform</h2>
 
@@ -373,7 +371,7 @@ Every 227g jar of Raspberry Ripple captures the flavour of roughly twenty whole 
 
 </div>
 
-<p style="text-align:center;margin-top:15px;">
+<p style="text-align:center;margin-top:30px;">
 University of Nottingham – NPD Project
 </p>
 
@@ -390,43 +388,32 @@ University of Nottingham – NPD Project
 
 <script>
 
-/* scroll animation */
+/* scroll reveal */
 
-const sections=document.querySelectorAll('.section')
+const sections=document.querySelectorAll('.section');
 
 window.addEventListener('scroll',()=>{
-
 sections.forEach(sec=>{
-
-const rect=sec.getBoundingClientRect()
-
+const rect=sec.getBoundingClientRect();
 if(rect.top<window.innerHeight-100){
-
-sec.classList.add('visible')
-
+sec.classList.add('visible');
 }
+});
+});
 
-})
-
-})
-
-/* background colour change while scrolling */
+/* background colour transition */
 
 const colours=[
-"#fff8e8",
-"#fff3d6",
-"#fef6e6",
-"#f9f2e5",
-"#f3ede1"
-]
+"#faf7f2",
+"#fff6e4",
+"#fff9ef",
+"#f8f2e6"
+];
 
 window.addEventListener("scroll",()=>{
-
-const scrollY=window.scrollY
-const index=Math.floor(scrollY/600)%colours.length
-document.body.style.background=colours[index]
-
-})
+const index=Math.floor(window.scrollY/700)%colours.length;
+document.body.style.background=colours[index];
+});
 
 </script>
 
