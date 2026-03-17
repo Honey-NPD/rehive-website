@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>ReHive Honey</title>
+
+<style>
+/* --------- GLOBAL --------- */
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin:0;
+  font-family: 'Georgia', serif;
+  background:#fdf8f3;
+  color:#333;
+  overflow-x:hidden;
+}
+
+img { max-width:100%; display:block; }
+
+/* --------- NAVIGATION --------- */
+nav {
+  position: fixed;
+  top:0;
+  width:100%;
+  background:white;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  gap:20px;
+  padding:12px 0;
+  box-shadow:0 3px 15px rgba(0,0,0,0.1);
+  z-index:100;
+}
+
+nav img { height:40px; }
+nav a {
+  text-decoration:none;
+  color:#333;
+  font-weight:bold;
+  letter-spacing:1px;
+  transition:color 0.3s;
+}
+nav a:hover { color:#b77d2a; }
+
+/* --------- HERO --------- */
+.hero {
+  height:100vh;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+  text-align:center;
+  position:relative;
+  overflow:hidden;
+}
+
+.hero h1 {
+  font-size:70px;
+  letter-spacing:4px;
+  margin:0;
+  display:flex;
+  align-items:center;
+  gap:15px;
+  z-index:2;
+}
+
+.hero p { font-size:22px; margin:10px 0; z-index:2; }
+.hero-tagline {
+  font-size:20px;
+  margin-top:10px;
+  font-weight:500;
+  opacity:0;
+  transform:translateY(20px);
+  animation: taglineEnter 2s forwards 1s;
+  z-index:2;
+}
+
+/* FLOATING JAR */
+.jar {
+  margin-top:30px;
+  width:240px;
+  animation: float 6s ease-in-out infinite;
+  z-index:2;
+}
+
+@keyframes float {
+  0%{transform:translateY(0) rotateY(0deg);}
+  50%{transform:translateY(-18px) rotateY(8deg);}
+  100%{transform:translateY(0) rotateY(0deg);}
+}
+
+@keyframes taglineEnter {
+  to { opacity:1; transform:translateY(0); }
+}
+
+/* BACKGROUND SWIRL */
+.swirl-bg {
+  position:absolute; top:0; left:0; width:100%; height:100%;
+  background:linear-gradient(45deg, #f7d98a,#ffd7e2,#e0c7ff,#f7d98a);
+  background-size:400% 400%;
+  animation:swirlMove 25s ease infinite;
+  z-index:1;
+}
+@keyframes swirlMove {
+  0%{background-position:0% 50%;}
+  50%{background-position:100% 50%;}
+  100%{background-position:0% 50%;}
+}
+
+/* --------- SECTIONS --------- */
+.section {
+  padding:70px 15%;
+  opacity:0;
+  transform:translateY(40px);
+  transition:1s;
+  position:relative;
+  z-index:2;
+}
+
+.section.visible {
+  opacity:1;
+  transform:translateY(0);
+}
+
+h2 {
+  font-size:36px;
+  margin-bottom:20px;
+  text-align:center;
+}
+
+/* --------- FLAVOUR CARDS --------- */
+.flavours {
+  display:flex;
+  flex-wrap:wrap;
+  gap:25px;
+  justify-content:center;
+}
+
+.card {
+  flex:1;
+  min-width:250px;
+  padding:25px;
+  border-radius:12px;
+  color:white;
+  box-shadow:0 15px 30px rgba(0,0,0,0.15);
+  transition:0.5s;
+  position:relative;
+  overflow:hidden;
+  cursor:pointer;
+}
+
+.card h3 { margin-top:0; }
+
+.strawberry { background:linear-gradient(135deg,#ff7a9c,#ffb3c7); }
+.raspberry  { background:linear-gradient(135deg,#b5123d,#ff4d77); }
+.blueberry  { background:linear-gradient(135deg,#4e63d9,#8ea0ff); }
+.banana     { background:linear-gradient(135deg,#ffd95a,#ffe99a); color:#333; }
+.limited    { background:linear-gradient(135deg,#6a2a7c,#ff8eb5); }
+
+/* Hover / Touch Effects */
+.card .flavour-bg {
+  position:absolute; top:0; left:0; width:100%; height:100%;
+  background:inherit; opacity:0; transform:scale(0); border-radius:12px; z-index:0;
+  transition: all 0.7s ease;
+}
+@media(hover:hover) {
+  .card:hover .flavour-bg { opacity:0.2; transform:scale(2); }
+  .card:hover { transform:translateY(-10px); }
+}
+
+/* --------- PROCESS FLOW --------- */
+.process {
+  display:flex;
+  flex-direction:column;
+  gap:30px;
+}
+
+.step {
+  padding:25px;
+  border-radius:10px;
+  box-shadow:0 8px 18px rgba(0,0,0,0.1);
+  text-align:center;
+  color:white;
+  font-weight:bold;
+  font-size:18px;
+  transition:0.5s;
+}
+
+/* Alternate background colour for steps */
+.step:nth-child(odd) { background:#f7d98a; color:#333; }
+.step:nth-child(even){ background:#ffd7e2; }
+
+/* --------- TEAM --------- */
+.team {
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
+  gap:25px;
+}
+
+.member {
+  background:white;
+  padding:20px;
+  border-radius:10px;
+  box-shadow:0 6px 15px rgba(0,0,0,0.1);
+  text-align:center;
+  transition:0.3s;
+}
+
+.member:hover { transform:translateY(-5px); }
+
+/* --------- FOOTER --------- */
+footer {
+  background:#333;
+  color:white;
+  text-align:center;
+  padding:50px;
+}
+
+/* --------- SCROLL ANIMATIONS --------- */
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <img src="logo.png" alt="Logo">
+  <a href="#about">About</a>
+  <a href="#flavours">Flavours</a>
+  <a href="#process">Process</a>
+  <a href="#vision">Serving</a>
+  <a href="#team">Team</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="swirl-bg"></div>
+  <h1>
+    ReHive
+    <img src="logo.png" alt="Logo" style="height:50px;">
+  </h1>
+  <p>Fruit Infused Raw Honey</p>
+  <p class="hero-tagline">Luxury creamed honey crafted from single-apiary Nottingham honey and vibrant fruit infusions. Small batch · Seasonal · Sustainable</p>
+  <div class="jar"><img src="jar.png" alt="Jar of Honey"></div>
+</section>
+
+<!-- ABOUT -->
+<section class="section" id="about">
+<h2>A New Kind of Honey</h2>
+<p>ReHive is a luxury creamed honey infused with real fruit and crafted in small batches.</p>
+<p>Each jar contains locally sourced raw honey from a single Nottinghamshire apiary combined with vibrant fruit flavours created from surplus and foraged fruit.</p>
+<p>The honey is whipped to a smooth, spreadable texture, finished with a two-colour fruit swirl that gives each flavour its distinctive look.</p>
+<p>Every 227g jar of Raspberry Ripple contains the flavour of ~20 whole raspberries captured through gentle drying and extraction.</p>
+</section>
+
+<!-- FLAVOURS -->
+<section class="section" id="flavours">
+<h2>The ReHive Collection</h2>
+<div class="flavours">
+<div class="card strawberry"><div class="flavour-bg"></div><h3>Strawberry Shortcake</h3><p>Sweet strawberries paired with smooth vanilla creamed honey.</p></div>
+<div class="card raspberry"><div class="flavour-bg"></div><h3>Raspberry Ripple</h3><p>Bright raspberry infusion swirled through whipped honey.</p></div>
+<div class="card blueberry"><div class="flavour-bg"></div><h3>Blueberry Tart</h3><p>Deep blueberry notes balanced with floral raw honey.</p></div>
+<div class="card banana"><div class="flavour-bg"></div><h3>Banana Cream</h3><p>Smooth banana flavour layered into whipped honey.</p></div>
+<div class="card limited"><div class="flavour-bg"></div><h3>Limited Editions</h3><p>We also create limited edition flavours based on seasonal and surplus fruits.</p></div>
+</div>
+</section>
+
+<!-- PROCESS -->
+<section class="section" id="process">
+<h2>Our Process</h2>
+<div class="process">
+<div class="step">Local Raw Honey</div>
+<div class="step">Surplus / Foraged Fruit</div>
+<div class="step">Low Energy Vacuum Drying</div>
+<div class="step">Fruit Powder + Fruit Extract</div>
+<div class="step">Honey Creaming Process</div>
+<div class="step">Dual-Colour Fruit Swirl</div>
+<div class="step">Small Batch Jarring</div>
+</div>
+</section>
+
+<!-- SERVING INSPIRATION -->
+<section class="section" id="vision">
+<h2>Serving Inspiration</h2>
+<ul>
+<li>Sourdough Toast</li>
+<li>Yogurt & Granola</li>
+<li>Pancakes & Waffles</li>
+<li>Cheeseboards</li>
+<li>Desserts</li>
+</ul>
+</section>
+
+<!-- TEAM -->
+<section class="section" id="team">
+<h2>Team Uniform</h2>
+<div class="team">
+<div class="member">Libby Adler</div>
+<div class="member">Rosie Henningham</div>
+<div class="member">Jaden Harsono</div>
+<div class="member">Seth Hui</div>
+</div>
+<p style="text-align:center;margin-top:20px;">University of Nottingham – NPD Project</p>
+</section>
+
+<!-- FOOTER -->
+<footer>
+<h3>ReHive Honey</h3>
+<p>Fruit Infused Raw Honey</p>
+</footer>
+
+<script>
+// Scroll animations
+const sections=document.querySelectorAll('.section');
+window.addEventListener('scroll',()=>{
+  sections.forEach(sec=>{
+    const rect=sec.getBoundingClientRect();
+    if(rect.top<window.innerHeight-100){
+      sec.classList.add('visible');
+    }
+  });
+});
+</script>
+
+</body>
+</html>
