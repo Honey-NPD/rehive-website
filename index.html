@@ -104,7 +104,7 @@ h2{font-size:40px;margin-bottom:25px;text-align:center;}
 }
 .card:hover::before{opacity:0.7;}
 .card:hover{
-  transform:translateY(-12px);
+transform:translateY(-12px);
 }
 
 /* FLAVOUR GRADIENTS */
@@ -141,12 +141,71 @@ transition:0.6s;
 position:relative;
 }
 
-/* PROCESS */
+/* SUSTAINABILITY SECTION */
 
-.process{display:flex;flex-direction:column;gap:20px;max-width:600px;margin:auto;}
-.step{background:#f5e2b8;padding:20px;border-radius:10px;text-align:center;}
+.sustainability{
+background:#fff9ef;
+padding:100px 18%;
+text-align:center;
+}
+.sustainability h2{margin-bottom:40px;}
+.sustainability-cards{
+display:flex;
+flex-wrap:wrap;
+gap:30px;
+justify-content:center;
+}
+.sustain-card{
+flex:1;
+min-width:200px;
+max-width:260px;
+background:white;
+border-radius:12px;
+padding:25px;
+box-shadow:0 8px 20px rgba(0,0,0,0.05);
+transition:0.3s;
+}
+.sustain-card:hover{transform:translateY(-6px);}
+.sustain-card img{width:60px;height:60px;margin-bottom:15px;}
 
-/* GALLERY / Crafted in Detail */
+/* PROCESS / TIMELINE RECTANGLES */
+
+.timeline{
+display:flex;
+flex-direction:column;
+gap:35px;
+max-width:900px;
+margin:auto;
+padding:40px 0;
+}
+.timeline-step{
+display:flex;
+flex-direction:column;
+align-items:center;
+text-align:center;
+gap:10px;
+opacity:0;
+transform:translateY(30px);
+transition:0.6s ease;
+}
+.timeline-step.visible{
+opacity:1;
+transform:translateY(0);
+}
+.timeline-step img{
+width:150px;
+height:100px; /* rectangular */
+object-fit:cover;
+border-radius:0; /* no circle */
+margin-bottom:15px;
+box-shadow:0 10px 25px rgba(0,0,0,0.08);
+transition:0.3s ease;
+}
+.timeline-step img:hover{
+transform:scale(1.05);
+}
+
+/* GALLERY */
 
 .gallery-grid{
 display:flex;
@@ -183,11 +242,27 @@ margin:10px 0;
 font-size:18px;
 }
 
-/* TEAM */
+/* TEAM WITH IMAGES */
 
 .team{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:20px;margin-top:20px;}
-.member{background:white;padding:20px;border-radius:10px;text-align:center;box-shadow:0 8px 20px rgba(0,0,0,0.08);transition:0.3s;}
-.member:hover{transform:translateY(-6px);}
+.member{
+background:white;
+padding:20px;
+border-radius:10px;
+text-align:center;
+box-shadow:0 8px 20px rgba(0,0,0,0.08);
+transition:0.3s;
+display:flex;
+align-items:center;
+gap:10px;
+justify-content:center;
+}
+.member img{
+width:40px;
+height:40px;
+border-radius:50%;
+object-fit:cover;
+}
 
 /* FOOTER */
 
@@ -202,6 +277,7 @@ footer{background:#2b2b2b;color:white;text-align:center;padding:40px;}
 <img src="logo.png">
 <a href="#about">About</a>
 <a href="#flavours">Flavours</a>
+<a href="#sustainability">Sustainability</a>
 <a href="#process">Process</a>
 <a href="#serving">Serving</a>
 </nav>
@@ -241,6 +317,27 @@ Crafted. Layered. Refined.
 </div>
 </section>
 
+<section class="section sustainability" id="sustainability">
+<h2>Sustainably Crafted</h2>
+<div class="sustainability-cards">
+<div class="sustain-card"><img src="icon_honey.png"><p>Locally sourced Nottinghamshire honey</p></div>
+<div class="sustain-card"><img src="icon_fruit.png"><p>Repurposed surplus & foraged fruit</p></div>
+<div class="sustain-card"><img src="icon_energy.png"><p>Cold vacuum drying preserves flavour & saves energy</p></div>
+<div class="sustain-card"><img src="icon_handcrafted.png"><p>Small-batch artisanal production</p></div>
+</div>
+</section>
+
+<section class="section" id="process">
+<h2>Our Process</h2>
+<div class="timeline">
+<div class="timeline-step"><img src="harvest_honey.png"><p>Source locally produced raw honey</p></div>
+<div class="timeline-step"><img src="fruit_selection.png"><p>Select & dry surplus fruits</p></div>
+<div class="timeline-step"><img src="extract_powder.png"><p>Create fruit powder & flavour extract</p></div>
+<div class="timeline-step"><img src="blend_honey.png"><p>Whip honey & blend in fruit</p></div>
+<div class="timeline-step"><img src="jar_pack.png"><p>Hand-finish & jar each batch</p></div>
+</div>
+</section>
+
 <section class="section">
 <h2>Crafted in Detail</h2>
 <div class="gallery-grid">
@@ -262,17 +359,16 @@ Crafted. Layered. Refined.
 <li>Yogurt and granola</li>
 <li>Pancakes and waffles</li>
 <li>Cheeseboards</li>
-<li>Refined desserts</li>
 </ul>
 </section>
 
 <section class="section">
 <h2>Team</h2>
 <div class="team">
-<div class="member">Libby Adler</div>
-<div class="member">Rosie Henningham</div>
-<div class="member">Jaden Harsono</div>
-<div class="member">Seth Hui</div>
+<div class="member"><img src="Libby.jpg">Libby Adler</div>
+<div class="member"><img src="Rosie.jpg">Rosie Henningham</div>
+<div class="member"><img src="Jaden.jpg">Jaden Harsono</div>
+<div class="member"><img src="Seth.jpg">Seth Hui</div>
 </div>
 </section>
 
@@ -294,33 +390,37 @@ sec.classList.add('visible');
 });
 });
 
-/* SPOTLIGHT ANIMATION */
+/* timeline reveal */
+const steps=document.querySelectorAll('.timeline-step');
+window.addEventListener('scroll',()=>{
+steps.forEach(step=>{
+const rect=step.getBoundingClientRect();
+if(rect.top<window.innerHeight-100){
+step.classList.add('visible');
+}
+});
+});
+
+/* spotlight */
 const jar=document.getElementById("spotlightJar");
 const text=document.getElementById("spotlightText");
 
 window.addEventListener("scroll",()=>{
-  const rect=document.querySelector(".spotlight").getBoundingClientRect();
-  if(rect.top < window.innerHeight && rect.bottom > 0){
-    let progress=1-(rect.top/window.innerHeight);
-    progress=Math.max(0,Math.min(progress,1));
-    jar.style.transform=`scale(${1 + progress*0.6})`;
-    text.style.opacity=progress>0.4?1:0;
-  }
+const rect=document.querySelector(".spotlight").getBoundingClientRect();
+if(rect.top < window.innerHeight && rect.bottom > 0){
+let progress=1-(rect.top/window.innerHeight);
+progress=Math.max(0,Math.min(progress,1));
+jar.style.transform=`scale(${1 + progress*0.6})`;
+text.style.opacity=progress>0.4?1:0;
+}
 });
 
-/* FLAVOUR HOVER BACKGROUND CHANGE */
+/* flavour hover */
 const cards=document.querySelectorAll('.card');
 cards.forEach(card=>{
-  const colour=card.dataset.bg;
-  card.addEventListener('mouseenter',()=>{document.body.style.background=colour;});
-  card.addEventListener('mouseleave',()=>{document.body.style.background="#faf7f2";});
-});
-
-/* background transition fallback */
-const colours=["#faf7f2","#fff6e4","#fff9ef","#f8f2e6"];
-window.addEventListener("scroll",()=>{
-const index=Math.floor(window.scrollY/700)%colours.length;
-document.body.style.background=colours[index];
+const colour=card.dataset.bg;
+card.addEventListener('mouseenter',()=>{document.body.style.background=colour;});
+card.addEventListener('mouseleave',()=>{document.body.style.background="#faf7f2";});
 });
 
 </script>
