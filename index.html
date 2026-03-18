@@ -4,6 +4,8 @@
 <meta charset="UTF-8">
 <title>ReHive Honey</title>
 
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+
 <style>
 
 /* GLOBAL */
@@ -14,12 +16,16 @@ scroll-behavior:smooth;
 
 body{
 margin:0;
-font-family:Georgia, serif;
+font-family:'Playfair Display', serif;
 background:#faf7f2;
-color:#333;
+color:#2b2b2b;
 padding-top:80px;
 overflow-x:hidden;
 transition:background 1.2s ease;
+}
+
+p, li{
+font-family:'Inter', sans-serif;
 }
 
 /* NAV */
@@ -28,25 +34,42 @@ nav{
 position:fixed;
 top:0;
 width:100%;
-background:white;
 display:flex;
 justify-content:center;
 align-items:center;
-gap:35px;
-padding:16px;
-box-shadow:0 3px 12px rgba(0,0,0,0.1);
+gap:40px;
+padding:18px;
+background:rgba(255,255,255,0.7);
+backdrop-filter:blur(10px);
+box-shadow:0 3px 20px rgba(0,0,0,0.05);
 z-index:100;
 }
 
 nav img{
-height:36px;
+height:38px;
 }
 
 nav a{
 text-decoration:none;
 color:#333;
-font-weight:bold;
+font-weight:500;
 letter-spacing:1px;
+position:relative;
+}
+
+nav a::after{
+content:"";
+position:absolute;
+left:0;
+bottom:-6px;
+width:0;
+height:2px;
+background:#d6b56b;
+transition:0.4s;
+}
+
+nav a:hover::after{
+width:100%;
 }
 
 /* HERO */
@@ -58,11 +81,14 @@ flex-direction:column;
 align-items:center;
 justify-content:center;
 text-align:center;
-background:linear-gradient(120deg,#f7d98a,#fff3c9);
+background:
+linear-gradient(rgba(255,255,255,0.5), rgba(255,255,255,0.7)),
+linear-gradient(120deg,#f7d98a,#fff3c9);
+background-attachment:fixed;
 }
 
 .hero h1{
-font-size:70px;
+font-size:72px;
 letter-spacing:4px;
 margin:0;
 display:flex;
@@ -76,16 +102,18 @@ font-size:22px;
 
 .tagline{
 max-width:650px;
-font-size:20px;
-margin-top:10px;
+font-size:19px;
+margin-top:12px;
+line-height:1.6;
 }
 
 /* FLOATING JAR */
 
 .jar{
-margin-top:30px;
+margin-top:40px;
 width:240px;
 animation:float 6s ease-in-out infinite;
+transition:transform 0.2s linear;
 }
 
 .jar img{
@@ -101,10 +129,10 @@ width:100%;
 /* SECTIONS */
 
 .section{
-padding:70px 15%;
+padding:100px 18%;
 opacity:0;
-transform:translateY(40px);
-transition:1s;
+transform:translateY(60px);
+transition:1.2s ease;
 }
 
 .section.visible{
@@ -113,8 +141,8 @@ transform:translateY(0);
 }
 
 h2{
-font-size:36px;
-margin-bottom:20px;
+font-size:40px;
+margin-bottom:25px;
 text-align:center;
 }
 
@@ -129,41 +157,23 @@ flex-wrap:wrap;
 .card{
 flex:1;
 min-width:250px;
-padding:30px;
-border-radius:12px;
+padding:35px;
+border-radius:14px;
 color:white;
-box-shadow:0 15px 30px rgba(0,0,0,0.15);
+box-shadow:0 20px 40px rgba(0,0,0,0.15);
 transition:0.4s;
 }
 
 .card:hover{
-transform:translateY(-10px);
+transform:translateY(-12px);
 }
 
-.strawberry{
-background:linear-gradient(135deg,#ff7a9c,#ffb3c7);
-}
-
-.raspberry{
-background:linear-gradient(135deg,#b5123d,#ff4d77);
-}
-
-.blueberry{
-background:linear-gradient(135deg,#4e63d9,#8ea0ff);
-}
-
-.banana{
-background:linear-gradient(135deg,#ffd95a,#ffe99a);
-color:#333;
-}
-
-.apple{
-background:linear-gradient(135deg,#6b2356,#66CC00);
-}
-    
-.limited{
-background:linear-gradient(135deg,#8a6a2b,#d6b56b);
-}
+.strawberry{background:linear-gradient(135deg,#ff7a9c,#ffb3c7);}
+.raspberry{background:linear-gradient(135deg,#b5123d,#ff4d77);}
+.blueberry{background:linear-gradient(135deg,#4e63d9,#8ea0ff);}
+.banana{background:linear-gradient(135deg,#ffd95a,#ffe99a);color:#333;}
+.apple{background:linear-gradient(135deg,#6b2356,#66CC00);}
+.limited{background:linear-gradient(135deg,#8a6a2b,#d6b56b);}
 
 /* PROCESS */
 
@@ -179,14 +189,47 @@ margin:auto;
 background:linear-gradient(135deg,#f5e2b8,#d7b067);
 padding:25px;
 border-radius:10px;
-box-shadow:0 8px 18px rgba(0,0,0,0.1);
 text-align:center;
-font-weight:bold;
+font-weight:500;
 transition:0.3s;
 }
 
 .step:hover{
-transform:scale(1.1);
+transform:scale(1.08);
+}
+
+/* GALLERY */
+
+.gallery-grid{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+gap:30px;
+margin-top:40px;
+}
+
+.gallery-item{
+text-align:center;
+}
+
+.gallery-item img{
+width:100%;
+border-radius:14px;
+box-shadow:0 15px 30px rgba(0,0,0,0.15);
+transition:0.4s;
+}
+
+.gallery-item img:hover{
+transform:scale(1.05);
+}
+
+.gallery-item p{
+margin-top:12px;
+font-size:15px;
+color:#555;
+max-width:320px;
+margin-left:auto;
+margin-right:auto;
+line-height:1.5;
 }
 
 /* SERVING */
@@ -197,7 +240,7 @@ margin:auto;
 }
 
 .serving li{
-margin:8px 0;
+margin:10px 0;
 font-size:18px;
 }
 
@@ -212,24 +255,24 @@ margin-top:20px;
 
 .member{
 background:white;
-padding:20px;
-border-radius:10px;
-box-shadow:0 6px 15px rgba(0,0,0,0.1);
+padding:25px;
+border-radius:12px;
+box-shadow:0 10px 25px rgba(0,0,0,0.08);
 text-align:center;
 transition:0.3s;
 }
 
 .member:hover{
-transform:translateY(-5px);
+transform:translateY(-6px);
 }
 
 /* FOOTER */
 
 footer{
-background:#333;
+background:#2b2b2b;
 color:white;
 text-align:center;
-padding:60px;
+padding:70px;
 }
 
 </style>
@@ -238,25 +281,22 @@ padding:60px;
 <body>
 
 <nav>
-
 <img src="logo.png">
-
 <a href="#about">About</a>
 <a href="#flavours">Flavours</a>
 <a href="#process">Process</a>
 <a href="#serving">Serving</a>
-
 </nav>
 
 
 <section class="hero">
 
-<h1>ReHive <img src="logo.png" style="height:50px"></h1>
+<h1>ReHive <img src="logo.png" style="height:55px"></h1>
 
 <p>Fruit Infused Raw Honey</p>
 
 <p class="tagline">
-Luxury creamed honey crafted from single-apiary Nottingham honey and vibrant fruit infusions.<br>
+Luxury creamed honey crafted from a single Nottinghamshire apiary and elevated through vibrant fruit infusions.<br>
 Small batch · Seasonal · Sustainable
 </p>
 
@@ -269,22 +309,18 @@ Small batch · Seasonal · Sustainable
 
 <section class="section" id="about">
 
-<h2>A New Kind of Honey</h2>
+<h2>A New Expression of Honey</h2>
 
 <p>
-ReHive is a luxury creamed honey infused with real fruit and crafted in small batches.
+ReHive is a refined creamed honey infused with real fruit, crafted in small batches with precision and care.
 </p>
 
 <p>
-Each jar contains locally sourced raw honey from a single Nottinghamshire apiary combined with vibrant fruit flavours created from surplus and foraged fruit.
+Each jar begins with locally sourced raw honey from a single Nottinghamshire apiary, paired with vibrant fruit derived from surplus and foraged ingredients.
 </p>
 
 <p>
-The honey is carefully whipped to create a smooth spreadable texture and finished with a two-colour fruit swirl.
-</p>
-
-<p>
-Every 227g jar of Raspberry Ripple contains the flavour of roughly 20 whole raspberries captured through our gentle drying and extraction process.
+Through a controlled creaming process, the honey develops a smooth, spreadable texture, finished with a distinctive dual-colour fruit swirl.
 </p>
 
 </section>
@@ -298,32 +334,32 @@ Every 227g jar of Raspberry Ripple contains the flavour of roughly 20 whole rasp
 
 <div class="card strawberry">
 <h3>Strawberry Shortcake</h3>
-<p>Sweet strawberry flavour blended with smooth vanilla creamed honey.</p>
+<p>Delicate strawberry notes folded into smooth vanilla creamed honey.</p>
 </div>
 
 <div class="card raspberry">
 <h3>Raspberry Ripple</h3>
-<p>Bright raspberry infusion swirled through whipped honey.</p>
+<p>Bright raspberry infusion layered through whipped honey.</p>
 </div>
 
 <div class="card blueberry">
 <h3>Blueberry & Lemon Tart</h3>
-<p>Deep blueberry notes balanced with a bright lemon zing, creating a vibrant premium flavour.</p>
+<p>Deep blueberry balanced with a refined citrus lift.</p>
 </div>
 
 <div class="card banana">
 <h3>Banana Split</h3>
-<p>Smooth banana honey layered with a cherry swirl for a nostalgic dessert-inspired finish.</p>
+<p>Smooth banana honey finished with a cherry swirl.</p>
 </div>
-  
+
 <div class="card apple">
 <h3>Apple & Blackberry Crumble</h3>
-<p>Cinnamon spiced Apple honey layered with a blackberry honey swirl for a warm classic finish.</p>
+<p>Spiced apple layered with a rich blackberry finish.</p>
 </div>
-  
+
 <div class="card limited">
 <h3>Limited Editions</h3>
-<p>Because we use seasonal and surplus fruit, new flavours appear throughout the year.</p>
+<p>Seasonal releases shaped by nature and availability.</p>
 </div>
 
 </div>
@@ -336,14 +372,38 @@ Every 227g jar of Raspberry Ripple contains the flavour of roughly 20 whole rasp
 <h2>Our Process</h2>
 
 <div class="process">
-
-<div class="step">Local Raw Honey</div>
+<div class="step">Single Apiary Raw Honey</div>
 <div class="step">Surplus & Foraged Fruit</div>
 <div class="step">Low Energy Vacuum Drying</div>
-<div class="step">Fruit Powder + Fruit Extract</div>
-<div class="step">Honey Creaming Process</div>
-<div class="step">Dual Colour Fruit Swirl</div>
+<div class="step">Fruit Powder & Extract Creation</div>
+<div class="step">Controlled Creaming</div>
+<div class="step">Signature Dual Swirl</div>
 <div class="step">Small Batch Jarring</div>
+</div>
+
+</section>
+
+
+<section class="section">
+
+<h2>Crafted in Detail</h2>
+
+<div class="gallery-grid">
+
+<div class="gallery-item">
+<img src="extracts.png">
+<p>Refined fruit powders and natural extracts, capturing pure flavour with precision.</p>
+</div>
+
+<div class="gallery-item">
+<img src="filled_jars.png">
+<p>Each jar hand-finished with a distinctive layered swirl for visual and textural depth.</p>
+</div>
+
+<div class="gallery-item">
+<img src="labelled_jars.png">
+<p>Final presentation — labelled and sealed as a premium small-batch product.</p>
+</div>
 
 </div>
 
@@ -355,13 +415,11 @@ Every 227g jar of Raspberry Ripple contains the flavour of roughly 20 whole rasp
 <h2>Serving Inspiration</h2>
 
 <ul>
-
 <li>Sourdough toast</li>
 <li>Yogurt and granola</li>
 <li>Pancakes and waffles</li>
 <li>Cheeseboards</li>
-<li>Desserts</li>
-
+<li>Refined desserts</li>
 </ul>
 
 </section>
@@ -369,19 +427,17 @@ Every 227g jar of Raspberry Ripple contains the flavour of roughly 20 whole rasp
 
 <section class="section">
 
-<h2>Team Uniform</h2>
+<h2>Team</h2>
 
 <div class="team">
-
 <div class="member">Libby Adler</div>
 <div class="member">Rosie Henningham</div>
 <div class="member">Jaden Harsono</div>
 <div class="member">Seth Hui</div>
-
 </div>
 
 <p style="text-align:center;margin-top:30px;">
-University of Nottingham – NPD Project
+University of Nottingham — NPD Project
 </p>
 
 </section>
@@ -410,14 +466,18 @@ sec.classList.add('visible');
 });
 });
 
-/* background colour transition */
+/* parallax jar */
 
-const colours=[
-"#faf7f2",
-"#fff6e4",
-"#fff9ef",
-"#f8f2e6"
-];
+const jar=document.querySelector('.jar');
+
+window.addEventListener('scroll',()=>{
+const offset=window.scrollY;
+jar.style.transform=`translateY(${offset*0.15}px)`;
+});
+
+/* background transition */
+
+const colours=["#faf7f2","#fff6e4","#fff9ef","#f8f2e6"];
 
 window.addEventListener("scroll",()=>{
 const index=Math.floor(window.scrollY/700)%colours.length;
