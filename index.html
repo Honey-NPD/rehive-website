@@ -78,47 +78,110 @@ transform:translateY(6px);
 .section.visible{opacity:1;transform:translateY(0);}
 h2{font-size:40px;margin-bottom:25px;text-align:center;}
 
-/* FLAVOURS */
+.flavours {
+  display: flex;
+  gap: 30px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
 
-.flavours{display:flex;gap:30px;flex-wrap:wrap;justify-content:center;}
-.card{
-  flex:1;
-  min-width:250px;
-  padding:35px;
-  border-radius:14px;
-  color:white;
-  position:relative;
-  overflow:hidden;
-  transition:0.6s ease;
-  cursor:pointer;
+.card {
+  flex: 1 1 260px;      /* flexible width */
+  max-width: 260px;      /* keeps all cards same size */
+  padding: 35px;
+  border-radius: 14px;
+  color: white;
+  position: relative;
+  overflow: hidden;
+  transition: 0.6s ease;
+  cursor: pointer;
+
+  display: flex;         /* flex to center content vertically */
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;   /* horizontal centering */
+  text-align: center;
+  min-height: 200px;     /* uniform height */
 }
-.card::before{
-  content:"";
-  position:absolute;
-  inset:-20%;
-  background:inherit;
-  filter:blur(50px);
-  opacity:0;
-  transition:0.4s;
-  z-index:-1;
+
+.card h3 {
+  margin: 0;
 }
-.card:hover::before{opacity:0.7;}
-.card:hover{
-transform:translateY(-12px);
+
+.card p {
+  opacity: 0;            /* hidden by default */
+  margin-top: 12px;      /* spacing under heading */
+  transition: opacity 0.35s ease;
+}
+
+.card:hover p {
+  opacity: 1;            /* show on hover */
+}
+
+.card::before {
+  content: "";
+  position: absolute;
+  inset: -20%;
+  background: inherit;
+  filter: blur(50px);
+  opacity: 0;
+  transition: 0.4s;
+  z-index: -1;
+}
+
+.card:hover::before {
+  opacity: 0.7;
+}
+
+.card:hover {
+  transform: translateY(-12px);
+}
+
+/* FLAVOURS CARDS — minimal change */
+.card h3 {
+  margin-bottom: 8px; /* small gap between title and description */
+  text-align: center;  /* keep title centered */
+}
+
+.card p {
+  opacity: 0;
+  transform: translateY(5px);  /* only a tiny shift */
+  transition: opacity 0.4s ease, transform 0.4s ease;
+  text-align: center;  /* center text horizontally */
+}
+
+.card:hover p {
+  opacity: 1;
+  transform: translateY(0);
 }
 
 /* FLAVOUR GRADIENTS */
-.strawberry{background:linear-gradient(135deg,#ff7a9c,#F3E5AB);}
-.raspberry{background:linear-gradient(135deg,#b5123d,#ff4d77);}
-.blueberry{
-background:linear-gradient(135deg,#3f57c7 0%,#5f75e0 25%,#fff59d 75%,#fff176 100%);
+.strawberry {
+  background: linear-gradient(135deg,#ff7a9c,#F3E5AB);
 }
-.banana{
-background:linear-gradient(135deg,#fff176 70%,#e03b3b 100%);
-color:#000;
+
+.raspberry {
+  background: linear-gradient(135deg,#d43873,#facae5);
 }
-.apple{background:linear-gradient(135deg,#6b2356 45%,#7ed957 100%);}
-.limited{background:linear-gradient(135deg,#d4af37,#fff3b0);color:#333;}
+
+/* Blueberry gradient with purple dominance */
+.blueberry {
+  background: linear-gradient(135deg, #844062 0%, #844062 50%, #f4e190 90%, #f4e190 100%);
+}
+
+.banana {
+  background: linear-gradient(135deg,#fff176 70%,#e03b3b 100%);
+  color: #000;
+}
+
+/* Limited Edition Metallic Gold */
+.limited {
+  background: linear-gradient(135deg, 
+              #b8860b 0%,   /* deep golden base */
+              #FFD700 60%,  /* classic gold mid-tone */
+              #b8860b 100%  /* subtle highlight for shine */);
+  color: #333;
+}
 
 /* SPOTLIGHT */
 
@@ -173,58 +236,86 @@ transition:0.3s;
 
 /* PROCESS / TIMELINE RECTANGLES */
 
+/* PROCESS / TIMELINE RECTANGLES */
+
 .timeline{
-display:flex;
-flex-direction:column;
-gap:35px;
-max-width:900px;
-margin:auto;
-padding:40px 0;
+  display:flex;
+  flex-direction:column;
+  gap:35px;
+  max-width:900px;
+  margin:auto;
+  padding:40px 0;
 }
+
 .timeline-step{
-display:flex;
-flex-direction:column;
-align-items:center;
-text-align:center;
-gap:10px;
-opacity:0;
-transform:translateY(30px);
-transition:0.6s ease;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  text-align:center;
+  gap:10px;
+  opacity:0;
+  transform:translateY(30px);
+  transition:0.6s ease;
 }
+
 .timeline-step.visible{
-opacity:1;
-transform:translateY(0);
+  opacity:1;
+  transform:translateY(0);
 }
+
 .timeline-step img{
-width:150px;
-height:100px;
-object-fit:cover;
-border-radius:0;
-margin-bottom:15px;
-box-shadow:0 10px 25px rgba(0,0,0,0.08);
-transition:0.3s ease;
+  width:250px;           /* bigger width */
+  height:180px;          /* bigger height */
+  object-fit:cover;
+  border-radius:12px;    /* rounded edges */
+  margin-bottom:15px;
+  box-shadow:0 10px 25px rgba(0,0,0,0.08);
+  transition:0.3s ease;
 }
+
 .timeline-step img:hover{
-transform:scale(1.05);
+  transform:scale(1.05);
 }
 
-/* GALLERY */
+/* CRAFTED IN DETAIL SECTION */
+.section#crafted-detail {
+  padding:100px 18%;
+  opacity:0;
+  transform:translateY(60px);
+  transition:1.2s ease;
+}
 
-.gallery-grid{
-display:flex;
-flex-wrap:wrap;
-justify-content:center;
-gap:20px;
-margin-top:20px;
+.section#crafted-detail.visible {
+  opacity:1;
+  transform:translateY(0);
 }
-.gallery-item{
-text-align:center;
-max-width:280px;
+
+/* Title styling */
+.section#crafted-detail h2 {
+  font-size:40px;
+  text-align:center;
+  margin-bottom:100px; /* much larger gap */
 }
-.gallery-item img{
-width:100%;
-border-radius:12px;
-display:block;
+
+/* Gallery grid spacing */
+.section#crafted-detail .gallery-grid {
+  display:flex;
+  flex-wrap:wrap;
+  justify-content:center;
+  gap:20px;
+  margin-top:20px; /* extra breathing room below title */
+}
+
+/* Individual gallery items */
+.section#crafted-detail .gallery-item {
+  text-align:center;
+  max-width:280px;
+}
+
+.section#crafted-detail .gallery-item img {
+  width:100%;
+  border-radius:12px;
+  display:block;
 }
 
 /* SERVING */
@@ -324,14 +415,43 @@ Small batch · Seasonal · Sustainable
 </section>
 
 <section class="section" id="flavours">
-<h2>The ReHive Collection</h2>
-<div class="flavours">
-<div class="card strawberry" data-bg="#ff7a9c"><h3>Strawberry Shortcake</h3><p>Delicate strawberry notes folded into smooth vanilla creamed honey.</p></div>
-<div class="card raspberry" data-bg="#b5123d"><h3>Raspberry Ripple</h3><p>Bright raspberry infusion layered through whipped honey.</p></div>
-<div class="card blueberry" data-bg="#3f57c7"><h3>Blueberry & Lemon Tart</h3><p>Deep blueberry balanced with a refined lemon lift.</p></div>
-<div class="card banana" data-bg="#fff176"><h3>Banana Split</h3><p>Smooth banana honey finished with a cherry swirl.</p></div>
-<div class="card limited" data-bg="#d4af37"><h3>Limited Editions</h3><p>Seasonal releases shaped by nature and availability.</p></div>
-</div>
+  <h2>The ReHive Collection</h2>
+  <div class="flavours">
+    <div class="card strawberry" data-bg="#ff7a9c">
+      <h3>Strawberry Shortcake</h3>
+      <div class="desc-wrapper">
+        Delicate strawberry notes folded into smooth vanilla creamed honey.
+      </div>
+    </div>
+
+    <div class="card raspberry" data-bg="#d43873">
+      <h3>Raspberry Ripple</h3>
+      <div class="desc-wrapper">
+        Bright raspberry infusion layered through whipped honey.
+      </div>
+    </div>
+
+    <div class="card blueberry" data-bg="#844062">
+      <h3>Blueberry & Lemon Tart</h3>
+      <div class="desc-wrapper">
+        Deep blueberry balanced with a refined lemon lift.
+      </div>
+    </div>
+
+    <div class="card banana" data-bg="#fff176">
+      <h3>Banana Split</h3>
+      <div class="desc-wrapper">
+        Smooth banana honey finished with a cherry swirl.
+      </div>
+    </div>
+
+    <div class="card limited" data-bg="#FFD700">
+      <h3>Limited Editions</h3>
+      <div class="desc-wrapper">
+        Seasonal releases shaped by nature and availability.
+      </div>
+    </div>
+  </div>
 </section>
 
 <section class="spotlight">
@@ -350,48 +470,66 @@ Crafted. Layered. Refined.
 <div class="sustain-card"><img src="icon_handcrafted.png"><p>Small-batch artisanal production</p></div>
 </div>
 </section>
-
 <section class="section" id="process">
-<h2>Our Process</h2>
-<div class="timeline">
-<div class="timeline-step"><img src="harvest_honey.png"><p>Source locally produced raw honey</p></div>
-<div class="timeline-step"><img src="fruit_selection.png"><p>Select & dry surplus fruits</p></div>
-<div class="timeline-step"><img src="extract_powder.png"><p>Create fruit powder & flavour extract</p></div>
-<div class="timeline-step"><img src="blend_honey.png"><p>Whip honey & blend in fruit</p></div>
-<div class="timeline-step"><img src="jar_pack.png"><p>Hand-finish & jar each batch</p></div>
-</div>
+  <h2>Our Process</h2>
+  <div class="timeline">
+    <div class="timeline-step">
+      <p>Source locally produced raw honey</p>
+      <img src="harvest_honey.png">
+    </div>
+    <div class="timeline-step">
+      <p>Select & dry surplus fruits</p>
+      <img src="fruit_selection.png">
+    </div>
+    <div class="timeline-step">
+      <p>Create fruit powder & flavour extract</p>
+      <img src="extract_powder.png">
+    </div>
+    <div class="timeline-step">
+      <p>Whip honey & blend in fruit</p>
+      <img src="blend_honey.png">
+    </div>
+    <div class="timeline-step">
+      <p>Hand-finish & jar each batch</p>
+      <img src="jar_pack.png">
+    </div>
+  </div>
 </section>
 
-<section class="section">
-<h2>Crafted in Detail</h2>
-<div class="gallery-grid">
-<div class="gallery-item">
-<img src="extracts.png">
-<p>Fruit powders and natural extracts derrived from real fruit, capturing pure flavour with precision.</p>
-</div>
-<div class="gallery-item">
-<img src="filled_jars.png">
-<p>Each jar hand-finished with a distinctive layered swirl for visual and textural depth.</p>
-</div>
-</div>
+<section class="section" id="crafted-detail">
+  <h2>Crafted in Detail</h2>
+  <div class="gallery-grid">
+    <div class="gallery-item">
+      <img src="extracts.png">
+      <p>Fruit powders and natural extracts derived from real fruit, capturing pure flavour with precision.</p>
+    </div>
+    <div class="gallery-item">
+      <img src="filled_jars.png">
+      <p>Each jar hand-finished with a distinctive layered swirl for visual and textural depth.</p>
+    </div>
+  </div>
 </section>
 
 <section class="serving" id="serving">
-<h2>Serving Inspiration</h2>
-<ul>
-<li>Sourdough toast</li>
-<li>Yogurt and granola</li>
-<li>Pancakes and waffles</li>
-<li>Cheeseboards</li>
-</ul>
+  <h2>Serving Inspiration</h2>
+  <ul>
+    <li>Sourdough toast</li>
+    <li>Yogurt and granola</li>
+    <li>Pancakes and waffles</li>
+    <li>Cheeseboards</li>
+  </ul>
 
-<div class="serving-images">
-<img src="waffle.png">
-<img src="sundae.png">
-<img src="yoghurt.png">
-<img src="porridge.png">
-</div>
+  <!-- Luxury product note -->
+  <p style="text-align:center; font-style:italic; color:#555; margin:20px 0;">
+    A curated selection showcasing our honey in versatile servings.
+  </p>
 
+  <div class="serving-images">
+    <img src="waffle.png">
+    <img src="sundae.png">
+    <img src="yoghurt.png">
+    <img src="porridge.png">
+  </div>
 </section>
 
 <section class="section">
