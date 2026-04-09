@@ -113,7 +113,10 @@ transform:translateY(-12px);
 .blueberry{
 background:linear-gradient(135deg,#3f57c7 0%,#5f75e0 25%,#fff59d 75%,#fff176 100%);
 }
-.banana{background:linear-gradient(135deg,#fff176 70%,#e03b3b 100%);}
+.banana{
+background:linear-gradient(135deg,#fff176 70%,#e03b3b 100%);
+color:#000;
+}
 .apple{background:linear-gradient(135deg,#6b2356 45%,#7ed957 100%);}
 .limited{background:linear-gradient(135deg,#d4af37,#fff3b0);color:#333;}
 
@@ -194,9 +197,9 @@ transform:translateY(0);
 }
 .timeline-step img{
 width:150px;
-height:100px; /* rectangular */
+height:100px;
 object-fit:cover;
-border-radius:0; /* no circle */
+border-radius:0;
 margin-bottom:15px;
 box-shadow:0 10px 25px rgba(0,0,0,0.08);
 transition:0.3s ease;
@@ -242,7 +245,29 @@ margin:10px 0;
 font-size:18px;
 }
 
-/* TEAM WITH IMAGES */
+/* SERVING IMAGES WITH ZOOM */
+
+.serving-images{
+display:flex;
+justify-content:center;
+gap:20px;
+margin-top:30px;
+flex-wrap:wrap;
+}
+.serving-images img{
+width:180px;
+height:180px;
+object-fit:cover;
+border-radius:10px;
+transition:transform 0.4s ease;
+}
+.serving-images img:hover{
+transform:scale(2);
+z-index:10;
+position:relative;
+}
+
+/* TEAM */
 
 .team{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:20px;margin-top:20px;}
 .member{
@@ -293,8 +318,8 @@ Small batch · Seasonal · Sustainable
 
 <section class="section" id="about">
 <h2>A New Expression of Honey</h2>
-<p>ReHive is a refined creamed honey infused with real fruit, crafted in small batches with precision and care.</p>
-<p>Each jar begins with locally sourced raw honey from a single Nottinghamshire apiary, paired with vibrant fruit derived from surplus and foraged ingredients.</p>
+<p>ReHive is a creamed honey infused with real fruit, crafted in small batches with precision and care.</p>
+<p>Each jar begins with locally sourced raw honey from a single Nottinghamshire apiary, paired with vibrant fruits derived from surplus and foraged ingredients.</p>
 <p>Through a controlled creaming process, the honey develops a smooth, spreadable texture, finished with a distinctive dual-colour fruit swirl.</p>
 </section>
 
@@ -305,7 +330,6 @@ Small batch · Seasonal · Sustainable
 <div class="card raspberry" data-bg="#b5123d"><h3>Raspberry Ripple</h3><p>Bright raspberry infusion layered through whipped honey.</p></div>
 <div class="card blueberry" data-bg="#3f57c7"><h3>Blueberry & Lemon Tart</h3><p>Deep blueberry balanced with a refined lemon lift.</p></div>
 <div class="card banana" data-bg="#fff176"><h3>Banana Split</h3><p>Smooth banana honey finished with a cherry swirl.</p></div>
-<div class="card apple" data-bg="#6b2356"><h3>Apple & Blackberry Crumble</h3><p>Spiced apple layered with a rich blackberry finish.</p></div>
 <div class="card limited" data-bg="#d4af37"><h3>Limited Editions</h3><p>Seasonal releases shaped by nature and availability.</p></div>
 </div>
 </section>
@@ -360,6 +384,14 @@ Crafted. Layered. Refined.
 <li>Pancakes and waffles</li>
 <li>Cheeseboards</li>
 </ul>
+
+<div class="serving-images">
+<img src="waffle.png">
+<img src="sundae.png">
+<img src="yoghurt.png">
+<img src="porridge.png">
+</div>
+
 </section>
 
 <section class="section">
@@ -381,47 +413,20 @@ Crafted. Layered. Refined.
 
 /* scroll reveal */
 const sections=document.querySelectorAll('.section');
-window.addEventListener('scroll',()=>{
-sections.forEach(sec=>{
-const rect=sec.getBoundingClientRect();
-if(rect.top<window.innerHeight-100){
-sec.classList.add('visible');
-}
-});
-});
+window.addEventListener('scroll',()=>{sections.forEach(sec=>{const rect=sec.getBoundingClientRect();if(rect.top<window.innerHeight-100){sec.classList.add('visible');}});});
 
 /* timeline reveal */
 const steps=document.querySelectorAll('.timeline-step');
-window.addEventListener('scroll',()=>{
-steps.forEach(step=>{
-const rect=step.getBoundingClientRect();
-if(rect.top<window.innerHeight-100){
-step.classList.add('visible');
-}
-});
-});
+window.addEventListener('scroll',()=>{steps.forEach(step=>{const rect=step.getBoundingClientRect();if(rect.top<window.innerHeight-100){step.classList.add('visible');}});});
 
 /* spotlight */
 const jar=document.getElementById("spotlightJar");
 const text=document.getElementById("spotlightText");
-
-window.addEventListener("scroll",()=>{
-const rect=document.querySelector(".spotlight").getBoundingClientRect();
-if(rect.top < window.innerHeight && rect.bottom > 0){
-let progress=1-(rect.top/window.innerHeight);
-progress=Math.max(0,Math.min(progress,1));
-jar.style.transform=`scale(${1 + progress*0.6})`;
-text.style.opacity=progress>0.4?1:0;
-}
-});
+window.addEventListener("scroll",()=>{const rect=document.querySelector(".spotlight").getBoundingClientRect();if(rect.top < window.innerHeight && rect.bottom > 0){let progress=1-(rect.top/window.innerHeight);progress=Math.max(0,Math.min(progress,1));jar.style.transform=`scale(${1 + progress*0.6})`;text.style.opacity=progress>0.4?1:0;}});
 
 /* flavour hover */
 const cards=document.querySelectorAll('.card');
-cards.forEach(card=>{
-const colour=card.dataset.bg;
-card.addEventListener('mouseenter',()=>{document.body.style.background=colour;});
-card.addEventListener('mouseleave',()=>{document.body.style.background="#faf7f2";});
-});
+cards.forEach(card=>{const colour=card.dataset.bg;card.addEventListener('mouseenter',()=>{document.body.style.background=colour;});card.addEventListener('mouseleave',()=>{document.body.style.background="#faf7f2";});});
 
 </script>
 
